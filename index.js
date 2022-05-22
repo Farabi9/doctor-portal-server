@@ -164,6 +164,8 @@ async function run() {
             const result = await bookingCollection.insertOne(booking);
             return res.send({ success: true, result })
         })
+
+        
         app.patch('/booking/:id', verifyJWT, async(req, res) => {
             const id = req.params.id;
             const payment= req.body;
@@ -176,7 +178,7 @@ async function run() {
             }
             const result = await paymentCollection.insertOne(payment);
             const updatedBooking = await bookingCollection.updateOne(filter, updatedDoc);
-            res.send(updatedDoc)
+            res.send(updatedBooking)
         })
 
         app.post('/doctor', verifyJWT, verifyAdmin, async (req, res) => {
